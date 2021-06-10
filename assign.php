@@ -14,6 +14,11 @@ echo $OUTPUT->header();
 echo $OUTPUT->heading($PAGE->heading);
 
 $form = new \tool_bulk_rubric_assign\form\assign_form();
+
+if ($data = $form->get_data()) {
+
+}
+
 $form->display();
 
 echo $OUTPUT->footer();
