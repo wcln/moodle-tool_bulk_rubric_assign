@@ -14,7 +14,8 @@ class assign_form extends moodleform {
     {
         $mform =& $this->_form;
 
-        // TODO add description of tool function
+        // Description
+        $mform->addElement('html', \html_writer::tag('p', get_string('tool_description', 'tool_bulk_rubric_assign')));
 
         // Text in title
         $mform->addElement('text', 'title', get_string('titlematch', 'tool_bulk_rubric_assign'));

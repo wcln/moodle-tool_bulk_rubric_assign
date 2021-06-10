@@ -7,3 +7,5 @@ $string['title']      = 'Bulk rubric assignment';
 $string['heading']    = 'Bulk rubric assignment';
 $string['titlematch'] = 'Text in title';
 $string['rubric']     = 'Rubric template';
+$string['tool_description']
+                      = 'Search within a course for assignments with titles that match \'Text in title\', and ensure that the assignment rubric matches the specified \'Rubric template\'.';
