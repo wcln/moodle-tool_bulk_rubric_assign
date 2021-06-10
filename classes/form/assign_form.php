@@ -4,6 +4,7 @@ namespace tool_bulk_rubric_assign\form;
 
 use html_writer;
 use moodleform;
+use tool_bulk_rubric_assign\rubric_assign_controller;
 
 defined('MOODLE_INTERNAL') || die;
 
@@ -41,7 +42,7 @@ class assign_form extends moodleform
 
         // Rubric template select
         $mform->addElement('select', 'template', get_string('rubric', 'tool_bulk_rubric_assign'),
-            [1 => 'Example template']);
+            rubric_assign_controller::get_rubric_templates());
         $mform->setType('template', PARAM_INT);
         $mform->addRule('template', 'required', 'required');
 
