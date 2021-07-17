@@ -29,22 +29,22 @@ class assign_form extends moodleform
         $mform->addElement('html', html_writer::tag('p', get_string('tool_description', 'tool_bulk_rubric_assign')));
 
         // Text in title
-        $mform->addElement('text', 'title', get_string('titlematch', 'tool_bulk_rubric_assign'));
-        $mform->setType('title', PARAM_TEXT);
-        $mform->addRule('title', 'required', 'required');
+        $mform->addElement('text', 'match_text', get_string('titlematch', 'tool_bulk_rubric_assign'));
+        $mform->setType('match_text', PARAM_TEXT);
+        $mform->addRule('match_text', 'required', 'required');
 
         // Course select
-        $mform->addElement('autocomplete', 'course', get_string('course'),
-            [0 => get_string('none')] + $DB->get_records_menu('course', ['visible' => 1], 'fullname ASC',
+        $mform->addElement('autocomplete', 'course_id', get_string('course'),
+            [0 => get_string('none')] + $DB->get_records_menu('course', null, 'fullname ASC',
                 'id,fullname'));
-        $mform->setType('course', PARAM_INT);
-        $mform->addRule('course', 'required', 'required');
+        $mform->setType('course_id', PARAM_INT);
+        $mform->addRule('course_id', 'required', 'required');
 
         // Rubric template select
-        $mform->addElement('select', 'template', get_string('rubric', 'tool_bulk_rubric_assign'),
+        $mform->addElement('select', 'template_id', get_string('rubric', 'tool_bulk_rubric_assign'),
             rubric_assign_controller::get_rubric_templates());
-        $mform->setType('template', PARAM_INT);
-        $mform->addRule('template', 'required', 'required');
+        $mform->setType('template_id', PARAM_INT);
+        $mform->addRule('template_id', 'required', 'required');
 
 
         $this->add_action_buttons(false, get_string('form_submit', 'tool_bulk_rubric_assign'));
@@ -64,8 +64,8 @@ class assign_form extends moodleform
         $errors = [];
 
         // Ensure that a course is selected
-        if (empty($data['course'])) {
-            $errors['course'] = get_string('error:no_course', 'tool_bulk_rubric_assign');
+        if (empty($data['course_id'])) {
+            $errors['course_id'] = get_string('error:no_course', 'tool_bulk_rubric_assign');
         }
 
         return $errors;
