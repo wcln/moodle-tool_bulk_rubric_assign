@@ -30,14 +30,17 @@ class rubric_assign_controller
                 $target_grading_area = $DB->get_record_sql($sql, ['assignment_id' => $assignment->id]);
 
                 /**
-                 * Thanks Moodle for making this as abstract as possible /s
-                 *
-                 * Don't even try to understand what is going on here, this is just copy & pasted from
-                 * grade/grading/pick.php
+                 * Below is mostly copy and pasted from grade/grading/pick.php
                  */
-                $targetmanager    = get_grading_manager($target_grading_area->id);
-                $method           = $targetmanager->get_active_method();
-                $targetcontroller = $targetmanager->get_controller($method);
+                $targetmanager = get_grading_manager($target_grading_area->id);
+                $method        = $targetmanager->get_active_method();
+
+                // Ensure the active method is 'rubric', otherwise an error is thrown
+                if ($method !== 'rubric') {
+                    $targetmanager->set_active_method('rubric');
+                }
+
+                $targetcontroller = $targetmanager->get_controller('rubric');
                 $sourceid         = $DB->get_field('grading_definitions', 'areaid', array('id' => $template_id),
                     MUST_EXIST);
                 $sourcemanager    = get_grading_manager($sourceid);
